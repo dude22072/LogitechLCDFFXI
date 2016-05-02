@@ -36,6 +36,7 @@
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             this.lblName = new System.Windows.Forms.Label();
             this.lblNotify = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -44,7 +45,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "Char Test";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -61,7 +62,6 @@
             this.rb_notify_true.Name = "rb_notify_true";
             this.rb_notify_true.Size = new System.Drawing.Size(47, 17);
             this.rb_notify_true.TabIndex = 1;
-            this.rb_notify_true.TabStop = true;
             this.rb_notify_true.Text = "True";
             this.rb_notify_true.UseVisualStyleBackColor = true;
             // 
@@ -72,7 +72,6 @@
             this.rb_notify_false.Name = "rb_notify_false";
             this.rb_notify_false.Size = new System.Drawing.Size(50, 17);
             this.rb_notify_false.TabIndex = 2;
-            this.rb_notify_false.TabStop = true;
             this.rb_notify_false.Text = "False";
             this.rb_notify_false.UseVisualStyleBackColor = true;
             // 
@@ -101,18 +100,29 @@
             this.lblNotify.TabIndex = 4;
             this.lblNotify.Text = "Minimize Notification:";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(96, 226);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Tell Test";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.lblNotify);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.rb_notify_false);
             this.Controls.Add(this.rb_notify_true);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "FFXI LCD";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_OnClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
@@ -130,6 +140,7 @@
         public System.Windows.Forms.Timer timerUpdate;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblNotify;
+        private System.Windows.Forms.Button button2;
     }
 }
 
