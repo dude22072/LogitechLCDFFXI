@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Net.Sockets;
+using System.Diagnostics;
 
 namespace LogitechLCDFFXI
 { 
@@ -20,6 +22,10 @@ namespace LogitechLCDFFXI
         string tellUser, tellMessage;
         /*other ints*/
         int currentDisplayMode = -1, previousDisplayMode = 0, returnDisplayTimer = 0;
+
+        TcpClient tcpclnt = new TcpClient();
+        NetworkStream stream = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -70,6 +76,14 @@ namespace LogitechLCDFFXI
 
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
+            if (tcpclnt.Connected)
+            {
+                Byte[] data = new Byte[256];
+                String responseData = String.Empty;
+                Int32 bytes = stream.Read(data, 0, data.Length);
+                responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+                Debug.WriteLine(responseData);
+            }
             if (Logitech.LogiLcdIsConnected(Logitech.LcdType.Mono) /*|| Logitech.LogiLcdIsConnected(Logitech.LcdType.Color)*/)
             {
                 updateCurrentDisplay(currentDisplayMode);
@@ -203,6 +217,12 @@ namespace LogitechLCDFFXI
         private void button2_Click(object sender, EventArgs e)
         {
             reciveTell("FriendSomething","This is a test of the tell notification on dude22072's logitech gamepanel LCD applet.");
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            tcpclnt.Connect("localhost", 33941);
+            stream = tcpclnt.GetStream();
         }
     }
 }
