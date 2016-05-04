@@ -38,6 +38,7 @@
             this.lblNotify = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.timerData = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // button1
@@ -117,9 +118,14 @@
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
             this.btnConnect.TabIndex = 6;
-            this.btnConnect.Text = "Connect";
+            this.btnConnect.Text = "Start Server";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // timerData
+            // 
+            this.timerData.Enabled = true;
+            this.timerData.Tick += new System.EventHandler(this.timerData_Tick);
             // 
             // Form1
             // 
@@ -154,6 +160,7 @@
         private System.Windows.Forms.Label lblNotify;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.Timer timerData;
     }
 }
 
