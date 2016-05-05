@@ -15,20 +15,17 @@ namespace LogitechLCDFFXI
     public partial class Form1 : Form
     {
         /*Strings for charachter information*/
-        string charName = "???????????????";
-        string job, sjob, location, lettercord, direction, time, day, conditions = "???";
+        public static volatile string charName = "???????????????";
+        public static volatile string job, sjob, location, lettercord, direction, time, day, conditions = "???";
         /*Integers for charachter information*/
-        int hp, mhp, mp, mmp, lvl, slvl, curEXP, nextEXP, numbercord, x, y, z,degree;
+        public static volatile int hp, mhp, mp, mmp, lvl, slvl, curEXP, nextEXP, numbercord, x, y, z,degree;
         /*strings for when a tell is recived*/
-        string tellUser, tellMessage;
+        public static volatile string tellUser, tellMessage;
         /*other ints*/
-        int currentDisplayMode = -1, previousDisplayMode = 0, returnDisplayTimer = 0;
-        static System.Net.IPAddress local = System.Net.IPAddress.Parse("127.0.0.1");
-        TcpListener tcpclnt = new TcpListener(local, 33941);
-        NetworkStream stream = null;
-        TcpClient client = null;
-        Boolean started,connected = false;
-        static string[] weather = new string[20]{"Clear","Sunshine","Clouds","Fog","Fire","Fire x2","Water","Water x2","Earth","Earth x2","Wind","Wind x2","Ice","Ice x2","Thunder","Thunder x2","Light","Light x2","Dark","Dark x2"};
+        static int currentDisplayMode = -1, previousDisplayMode = 0, returnDisplayTimer = 0;
+       
+        public static volatile Boolean started,connected = false;
+        
 
         public Form1()
         {
@@ -54,8 +51,9 @@ namespace LogitechLCDFFXI
         private void Form1_OnClosing(object sender, FormClosingEventArgs e)
         {
             Logitech.LogiLcdShutdown();
-            client.Close();
-            tcpclnt.Stop();
+            Program.workerObject.RequestStop();
+            Worker.client.Close();
+            Worker.tcpclnt.Stop();
             trayIcon.Visible = false;
         }
 
@@ -111,46 +109,46 @@ namespace LogitechLCDFFXI
             while (charname.Length < 15) {
                 charname += " ";
             }
-            this.charName = charname;
-            this.job = job;
-            this.lvl = lvl;
-            this.sjob = sjob;
-            this.slvl = slvl;
-            this.curEXP = curexp;
-            this.nextEXP = nextexp;
-            this.location = local;
-            this.lettercord = letcord;
-            this.numbercord = numcord;
-            this.x = px;
-            this.y = py;
-            this.z = pz;
-            this.degree = deg;
-            this.direction = "NNW"; //TODO: determine direction bassed on degree
-            this.time = gametime;
-            this.day = gameday;
-            this.conditions = weather;
+            Form1.charName = charname;
+            Form1.job = job;
+            Form1.lvl = lvl;
+            Form1.sjob = sjob;
+            Form1.slvl = slvl;
+            Form1.curEXP = curexp;
+            Form1.nextEXP = nextexp;
+            Form1.location = local;
+            Form1.lettercord = letcord;
+            Form1.numbercord = numcord;
+            Form1.x = px;
+            Form1.y = py;
+            Form1.z = pz;
+            Form1.degree = deg;
+            Form1.direction = "NNW"; //TODO: determine direction bassed on degree
+            Form1.time = gametime;
+            Form1.day = gameday;
+            Form1.conditions = weather;
         }
 
-        private void reciveTell(string tellname, string tellmess)
+        public static void reciveTell(string tellname, string tellmess)
         {
             //if(rb_tell_true.Enabled == true) {
-                this.tellUser = tellname;
-                this.tellMessage = tellmess;
+                tellUser = tellname;
+                tellMessage = tellmess;
                 previousDisplayMode = currentDisplayMode;
                 currentDisplayMode = 4;
             //}
         }
 
-        private void reviceName(string name)
+        public static void reviceName(string name)
         {
             while (name.Length < 15)
             {
                 name += " ";
             }
-            this.charName = name;
+            charName = name;
         }
 
-        double map(int x, int in_min, int in_max, int out_min,int out_max) {
+        public static double map(int x, int in_min, int in_max, int out_min,int out_max) {
             return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
         }
 
@@ -232,111 +230,24 @@ namespace LogitechLCDFFXI
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
+            Worker.tcpclnt.Start();
             started = true;
-            tcpclnt.Start();
         }
 
+        public static string formatTime(int input)
+        {
+            //TODO:
+            int hour, min = 0;
+            hour = Convert.ToInt32(Math.Truncate(Convert.ToDouble(input/60)));
+            Debug.WriteLine("Hour:"+hour);
+            Debug.WriteLine("Thing::" + (input - hour));
+            min = Convert.ToInt32(map((input-hour),0,99,0,60));
+            return hour + ":" + min;
+        }
+
+        [System.Obsolete("")]
         private void timerData_Tick(object sender, EventArgs e)
         {
-            Byte[] bytes = new Byte[256];
-            String data = null;
-            if (started)
-            {
-                if (tcpclnt.Pending())
-                {
-                    client = tcpclnt.AcceptTcpClient();
-                    stream = client.GetStream();
-                    connected = true;
-                    Debug.WriteLine("connected");
-                }
-                if (connected)
-                {
-                    int i;
-                    if ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
-                    {
-                        // Translate data bytes to a ASCII string.
-                        data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                        Debug.WriteLine("Received: {0}", data);
-
-                        string[] multirecive = data.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
-                        int k;
-                        for (k = 0; k < multirecive.Length; k++)
-                        {
-                            string[] cmdData = multirecive[k].Split(new char[] { ':' });
-                            switch (cmdData[0].ToUpper())
-                            {
-                                case "NAME":
-                                    reviceName(cmdData[1]);
-                                    break;
-                                case "JOB":
-                                    job = cmdData[1];
-                                    break;
-                                case "JOBL":
-                                    lvl = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "SJOB":
-                                    sjob = cmdData[1];
-                                    break;
-                                case "SJOBL":
-                                    slvl = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "HP":
-                                    hp = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "MHP":
-                                    mhp = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "MP":
-                                    mp = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "MMP":
-                                    mmp = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "EXP":
-                                    curEXP = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "EXPN":
-                                    nextEXP = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "LOC":
-                                    location = cmdData[1];
-                                    break;
-                                case "LCD":
-                                    lettercord = cmdData[1];
-                                    break;
-                                case "NCD":
-                                    numbercord = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "TIM":
-                                    time = cmdData[1];
-                                    break;
-                                case "DAY":
-                                    day = cmdData[1];
-                                    break;
-                                case "X":
-                                    x = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "Y":
-                                    y = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "Z":
-                                    z = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "DEG":
-                                    degree = Convert.ToInt32(cmdData[1]);
-                                    break;
-                                case "WTH":
-                                    conditions = weather[Convert.ToInt32(cmdData[1])];
-                                    break;
-                                default:
-                                    Debug.WriteLine(data);
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
-
             /*
             {
                 Byte[] data = new Byte[256];

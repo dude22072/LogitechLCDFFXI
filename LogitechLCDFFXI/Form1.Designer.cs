@@ -124,7 +124,6 @@
             // 
             // timerData
             // 
-            this.timerData.Enabled = true;
             this.timerData.Tick += new System.EventHandler(this.timerData_Tick);
             // 
             // Form1

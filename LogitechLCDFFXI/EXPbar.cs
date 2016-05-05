@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LogitechLCDFFXI
 {
-    [System.Obsolete("",true)]
+    [System.Obsolete("Yea not going this route.",true)]
     class EXPbar
     {
 
