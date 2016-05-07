@@ -236,16 +236,10 @@ namespace LogitechLCDFFXI
 
         public static string formatTime(int input)
         {
-            //TODO:
-            int sto, hour=0, min;
-            sto = input;
-            while (sto >= 60)
-            {
-                sto = sto - 60;
-                hour++;
-            }
-            min = sto;
-            return hour + ":" + min;
+            /*hour = input / 60;
+            min = input % 60;
+            return hour + ":" + min.ToString().PadLeft(2, '0');*/
+            return input / 60 + ":" + (input % 60).ToString().PadLeft(2, '0');
         }
 
         [System.Obsolete("")]
