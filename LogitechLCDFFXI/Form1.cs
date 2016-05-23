@@ -16,15 +16,41 @@ namespace LogitechLCDFFXI
     {
         /*Strings for charachter information*/
         public static volatile string charName = "???????????????";
-        public static volatile string job, sjob, location, lettercord, direction, time, day, conditions = "???";
+        public static volatile string job, sjob, location, lettercord, numbercord, direction, time, day, conditions = "???";
         /*Integers for charachter information*/
-        public static volatile int hp, mhp, mp, mmp, lvl, slvl, curEXP, nextEXP, numbercord, x, y, z,degree;
+        public static volatile int hp, mhp, mp, mmp, lvl, slvl, curEXP, nextEXP, x, y, z,degree;
         /*strings for when a tell is recived*/
         public static volatile string tellUser, tellMessage;
         /*other ints*/
         static int currentDisplayMode = -1, previousDisplayMode = 0, returnDisplayTimer = 0;
        
         public static volatile Boolean started,connected = false;
+        public static volatile String[] locationTable = new String[] {"",//0
+        "","","","","","","","","","",//10
+        "","","","","","","","","","",//20
+        "","","","","","","","","","",//30
+        "","","","","","","","","","",//40
+        "","","","","","","","","","",//50
+        "","","","","","","","","","",//60
+        "","","","","","","","","","",//70
+        "","","","","","","","","","",//80
+        "","","","","","","","","","",//90
+        "","","","","","","","","","",//100
+        "","","","","","","","","","",//110
+        "","","","","","","","","","",//120
+        "","","","","","","","","","",//130
+        "","","","","","","","","","",//140
+        "","","","","","","","","","",//150
+        "","","","","","","","","","",//160
+        "","","","","","","","","","",//170
+        "","","","","","","","","","",//180
+        "","","","","","","","","","",//190
+        "","","","","","","","","","",//200
+        "","","","","","","","","","",//210
+        "","","","","","","","","","",//220
+        "","","","","","","","","","",//230
+        "","","","Bastok Mines","Bastok Markets","Port Bastok","Metalworks","","","",//240
+        };
         
 
         public Form1()
@@ -34,7 +60,7 @@ namespace LogitechLCDFFXI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            reciveInfo("TEST", "TST", 99, "TST", 99, 118800, 118800, "Bastok Mines", "H", 8, -100, -100, -22, 359, "22:22", "Lightningsday", "Foggy");
+            reciveInfo("TEST", "TST", 99, "TST", 99, 118800, 118800, "Bastok Mines", "H", "8", -100, -100, -22, 359, "22:22", "Lightningsday", "Foggy");
             currentDisplayMode = 0;
         }
 
@@ -104,7 +130,7 @@ namespace LogitechLCDFFXI
         }
 
         [System.Obsolete("FFXI doesn't work well with a \"HERES EVERYTHING\" solution.")]
-        private void reciveInfo(string charname, string job, int lvl, string sjob, int slvl, int curexp, int nextexp, string local, string letcord, int numcord, int px, int py, int pz, int deg, string gametime, string gameday, string weather)
+        private void reciveInfo(string charname, string job, int lvl, string sjob, int slvl, int curexp, int nextexp, string local, string letcord, string numcord, int px, int py, int pz, int deg, string gametime, string gameday, string weather)
         {
             while (charname.Length < 15) {
                 charname += " ";
@@ -165,7 +191,10 @@ namespace LogitechLCDFFXI
                 Logitech.LogiLcdMonoSetText(0, "");
                 Logitech.LogiLcdMonoSetText(1, "     Final Fantasy XI     ");
                 Logitech.LogiLcdMonoSetText(2, "          Online          ");
-                Logitech.LogiLcdMonoSetText(3, "   Awaiting Connection... ");
+                if (started && !connected)
+                {
+                    Logitech.LogiLcdMonoSetText(3, "   Awaiting Connection... ");
+                } else { Logitech.LogiLcdMonoSetText(3, ""); }
                 Logitech.LogiLcdMonoSetBackground(Logitech.lcdBackroundBlank);
             }
             else if (dispMode == 0) /*First Tab*/
@@ -179,8 +208,11 @@ namespace LogitechLCDFFXI
             }
             else if (dispMode == 1) /*Second Tab*/
             {
-                Logitech.LogiLcdMonoSetText(0, location);
-                if (numbercord < 10) { Logitech.LogiLcdMonoSetText(1, "(" + lettercord + "-" + numbercord + ")  " + time + "  " + day);}
+                if (location != "?")
+                {
+                    Logitech.LogiLcdMonoSetText(0, locationTable[Convert.ToInt64(location)]);
+                } else { Logitech.LogiLcdMonoSetText(0, "?");  }
+                if (numbercord.Length < 2) { Logitech.LogiLcdMonoSetText(1, "(" + lettercord + "-" + numbercord + ")  " + time + "  " + day);}
                 else { Logitech.LogiLcdMonoSetText(1, "(" + lettercord + "-" + numbercord + ") " + time + "  " + day); }
                 Logitech.LogiLcdMonoSetText(2, "X:"+x+" Y:"+y+" Z:"+z + " " + direction + degree + "°");
                 Logitech.LogiLcdMonoSetText(3, "Weather: " + conditions);

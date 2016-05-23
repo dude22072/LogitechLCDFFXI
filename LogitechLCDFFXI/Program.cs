@@ -84,12 +84,12 @@ namespace LogitechLCDFFXI
                                 case "LOC":
                                     Form1.location = cmdData[1];
                                     break;
-                                case "LCD":
+                                /*case "LCD":
                                     Form1.lettercord = cmdData[1];
                                     break;
                                 case "NCD":
-                                    Form1.numbercord = Convert.ToInt32(cmdData[1]);
-                                    break;
+                                    Form1.numbercord = cmdData[1];
+                                    break;*/
                                 case "TIM":
                                     Form1.time = Form1.formatTime(Convert.ToInt32(cmdData[1]));
                                     break;
@@ -118,11 +118,11 @@ namespace LogitechLCDFFXI
                                     Form1.lettercord = cmdData[1].Substring(1, 1);
                                     if (cmdData[1].Length == 5)
                                     {
-                                        Form1.numbercord = Convert.ToInt32(cmdData[1].Substring(3, 1));
+                                        Form1.numbercord = cmdData[1].Substring(3, 1);
                                     }
                                     else
                                     {
-                                        Form1.numbercord = Convert.ToInt32(cmdData[1].Substring(3, 2));
+                                        Form1.numbercord = cmdData[1].Substring(3, 2);
                                     }
                                     break;
                                 default:
