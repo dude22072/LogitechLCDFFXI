@@ -13,4 +13,7 @@ To us in it's current state:
 A work-in-progress.  
 Final goal is to create an application that connects to a Windower4 LUA script to show information from FFXI on the Logitech GamePanel.  
   
-Only monochrome support is currently planned, but colour LCD may come in the future.
+Only monochrome support is currently planned, but colour LCD may come in the future.  
+# Credits
+Experience Code borrowed from barfiller  
+Zone IDs from [Darkstar Project Wiki](https://wiki.dspt.info/index.php/Zone_IDs)  
