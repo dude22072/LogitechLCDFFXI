@@ -25,31 +25,36 @@ namespace LogitechLCDFFXI
         static int currentDisplayMode = -1, previousDisplayMode = 0, returnDisplayTimer = 0;
        
         public static volatile Boolean started,connected = false;
-        public static volatile String[] locationTable = new String[] {"",//0
-        "","","","","","","","","","",//10
-        "","","","","","","","","","",//20
-        "","","","","","","","","","",//30
-        "","","","","","","","","","",//40
-        "","","","","","","","","","",//50
-        "","","","","","","","","","",//60
-        "","","","","","","","","","",//70
-        "","","","","","","","","","",//80
+        public static volatile String[] locationTable = new String[] {"Residential Area",//0
+        "Phanauet Channel","Carpenters Landing","Manaclipper","Bibiki Bay","Uleguerand Range","Bearclaw Pinnacle","Attohwa Chasm","Boneyard Gully","PsoXja","The Shrouded Maw",//10
+        "Oldton Movalpolos","Newton Movalpolos","Mine Shaft 2716","Hall of Transference","Abyssea-Konschtat","Promyvion-Holla","Spire of Holla","Promyvion-Dem","Spire of Dem","Promyvion-Mea",//20
+        "Spire of Mea","Promyvion-Vahzl","Spire of Vahzl","Lufaise Meadows","Misareaux Coast","Tavnazian Safehold","Phomiuna Aqueducts","Sacrarium","Riverne-Site B01","Riverne-Site A01",//30
+        "Monarch Linn","Sealions Den","AlTaieu","Grand Palace of HuXzoi","The Garden of RuHmet","Empyreal Paradox","Temenos","Apollyon","Dynamis-Valkurm","Dynamis-Buburimu",//40
+        "Dynamis-Qufim","Dynamis-Tavnazia","Diorama Abdhaljs-Ghelsba","Abdhaljs Isle-Purgonorgo","Abyssea-Tahrongi","Open sea -> Al Zahbi","Open sea -> Mhaura","Al Zahbi","noname","Aht Urhgan Whitegate",//50
+        "Wajaom Woodlands","Bhaflau Thickets","Nashmau","Arrapago Reef","Ilrusi Atoll","Periqia","Talacca Cove","Silver Sea -> Nashmau","Silver Sea -> Al Zahbi","The Ashu Talif",//60
+        "Mount Zhayolm","Halvung","Lebros Cavern","Navukgo Execution Chamber","Mamook","Mamool Ja Training Grounds","Jade Sepulcher","Aydeewa Subterrane","Leujaoam Sanctum","Chocobo Circuit",//70
+        "","","","","","","","","","Southern San d'Oria",//80
         "","","","","","","","","","",//90
         "","","","","","","","","","",//100
         "","","","","","","","","","",//110
         "","","","","","","","","","",//120
         "","","","","","","","","","",//130
-        "","","","","","","","","","",//140
+        "","","noname","","","","","","","",//140
         "","","","","","","","","","",//150
         "","","","","","","","","","",//160
         "","","","","","","","","","",//170
         "","","","","","","","","","",//180
-        "","","","","","","","","","",//190
+        "","","","","","","","","noname","",//190
         "","","","","","","","","","",//200
-        "","","","","","","","","","",//210
-        "","","","","","","","","","",//220
-        "","","","","","","","","","",//230
-        "","","","Bastok Mines","Bastok Markets","Port Bastok","Metalworks","","","",//240
+        "","","","","","","","","","noname",//210
+        "","","","","","","","","noname","",//220
+        "","","","","","","","","noname","Southern San d'Oria",//230
+        "Northern San d'Oria","Port San d'Oria","Chateau d'Oranguille","Bastok Mines","Bastok Markets","Port Bastok","Metalworks","Windrust Waters","Windrust Walls","Port Windrust",//240
+        "Windrust Woods","Heavens Tower","RuLude Gardens","Upper Jeuno","Lower Jueno","Port Jueno","Rabao","Selbina","Mhaura","Kazham",//250
+        "Hall of the Gods","Norg","Abyssea-Uleguerand","Abyssea-Grauberg","Abyssea-Empyreal Paradox","Western Adoulin","Eastern Adoulin","Rala Waterways","Rala Waterways","Yahse Hunting Grounds",//260
+        "Ceizak Battlegrounds","Foret de Hennetiel","Yorcia Weald","Yorcia Weald","Morimar Basalt Fields","Marjami Ravine","Kamihr Drifts","Sih Gates","Moh Gates","Cirdas Caverns",//270
+        "Cirdas Caverns","Dho Gates","Woh Gates","","","","","","","Mog Garden",//280
+        "","","","","Mog House"
         };
         
 
