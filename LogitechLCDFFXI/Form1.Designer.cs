@@ -39,6 +39,11 @@
             this.button2 = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
             this.timerData = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblExpStyle = new System.Windows.Forms.Label();
+            this.rb_exp_bar = new System.Windows.Forms.RadioButton();
+            this.rb_exp_text = new System.Windows.Forms.RadioButton();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -126,11 +131,51 @@
             // 
             this.timerData.Tick += new System.EventHandler(this.timerData_Tick);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblExpStyle);
+            this.panel1.Controls.Add(this.rb_exp_bar);
+            this.panel1.Controls.Add(this.rb_exp_text);
+            this.panel1.Location = new System.Drawing.Point(15, 52);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 27);
+            this.panel1.TabIndex = 10;
+            // 
+            // lblExpStyle
+            // 
+            this.lblExpStyle.AutoSize = true;
+            this.lblExpStyle.Location = new System.Drawing.Point(-3, 6);
+            this.lblExpStyle.Name = "lblExpStyle";
+            this.lblExpStyle.Size = new System.Drawing.Size(57, 13);
+            this.lblExpStyle.TabIndex = 12;
+            this.lblExpStyle.Text = "EXP Style:";
+            // 
+            // rb_exp_bar
+            // 
+            this.rb_exp_bar.AutoSize = true;
+            this.rb_exp_bar.Location = new System.Drawing.Point(162, 1);
+            this.rb_exp_bar.Name = "rb_exp_bar";
+            this.rb_exp_bar.Size = new System.Drawing.Size(41, 17);
+            this.rb_exp_bar.TabIndex = 11;
+            this.rb_exp_bar.Text = "Bar";
+            this.rb_exp_bar.UseVisualStyleBackColor = true;
+            // 
+            // rb_exp_text
+            // 
+            this.rb_exp_text.AutoSize = true;
+            this.rb_exp_text.Location = new System.Drawing.Point(109, 2);
+            this.rb_exp_text.Name = "rb_exp_text";
+            this.rb_exp_text.Size = new System.Drawing.Size(46, 17);
+            this.rb_exp_text.TabIndex = 10;
+            this.rb_exp_text.Text = "Text";
+            this.rb_exp_text.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lblNotify);
@@ -143,6 +188,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_OnClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,6 +207,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Timer timerData;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblExpStyle;
+        private System.Windows.Forms.RadioButton rb_exp_bar;
+        private System.Windows.Forms.RadioButton rb_exp_text;
     }
 }
 

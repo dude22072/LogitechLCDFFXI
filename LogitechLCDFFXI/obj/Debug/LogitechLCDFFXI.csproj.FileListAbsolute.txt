@@ -1,9 +1,0 @@
-c:\users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\Debug\LogitechLCDFFXI.csprojResolveAssemblyReference.cache
-c:\users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\Debug\LogitechLCDFFXI.Form1.resources
-c:\users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\Debug\LogitechLCDFFXI.Properties.Resources.resources
-c:\users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\Debug\LogitechLCDFFXI.csproj.GenerateResource.Cache
-c:\users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\bin\Debug\LogitechLCDFFXI.exe
-c:\users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\bin\Debug\LogitechLCDFFXI.pdb
-c:\users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\Debug\LogitechLCDFFXI.exe
-c:\users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\Debug\LogitechLCDFFXI.pdb
-C:\Users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\bin\Debug\LogitechLCDFFXI.exe.config

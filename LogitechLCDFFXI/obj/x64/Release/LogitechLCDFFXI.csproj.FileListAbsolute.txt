@@ -1,8 +1,0 @@
-C:\Users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\bin\x64\Release\LogitechLCDFFXI.exe.config
-C:\Users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\bin\x64\Release\LogitechLCDFFXI.exe
-C:\Users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\bin\x64\Release\LogitechLCDFFXI.pdb
-C:\Users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\x64\Release\LogitechLCDFFXI.Form1.resources
-C:\Users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\x64\Release\LogitechLCDFFXI.Properties.Resources.resources
-C:\Users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\x64\Release\LogitechLCDFFXI.csproj.GenerateResource.Cache
-C:\Users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\x64\Release\LogitechLCDFFXI.exe
-C:\Users\tammi\documents\visual studio 2013\Projects\LogitechLCDFFXI\LogitechLCDFFXI\obj\x64\Release\LogitechLCDFFXI.pdb

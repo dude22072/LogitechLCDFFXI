@@ -14,6 +14,7 @@ namespace LogitechLCDFFXI
     
     public partial class Form1 : Form
     {
+        EXPbar expbar = new EXPbar();
         /*Strings for charachter information*/
         public static volatile string charName = "???????????????";
         public static volatile string job, sjob, location, lettercord, numbercord, direction, time, day, conditions = "???";
@@ -65,7 +66,7 @@ namespace LogitechLCDFFXI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            reciveInfo("TEST", "TST", 99, "TST", 99, 118800, 118800, "Bastok Mines", "H", "8", -100, -100, -22, 359, "22:22", "Lightningsday", "Foggy");
+            reciveInfo("TEST", "TST", 99, "TST", 99, 52800, 118800, "234", "H", "8", -100, -100, -22, 359, "22:22", Worker.days[5], Worker.weather[3]);
             currentDisplayMode = 0;
         }
 
@@ -77,13 +78,14 @@ namespace LogitechLCDFFXI
             trayIcon.BalloonTipIcon = ToolTipIcon.Info;
             trayIcon.Icon = this.Icon;
             rb_notify_true.Checked = true;
+            rb_exp_text.Checked = true;
         }
 
         private void Form1_OnClosing(object sender, FormClosingEventArgs e)
         {
             Logitech.LogiLcdShutdown();
             Program.workerObject.RequestStop();
-            Worker.client.Close();
+            if (Worker.client != null) { Worker.client.Close(); }
             Worker.tcpclnt.Stop();
             trayIcon.Visible = false;
         }
@@ -183,12 +185,6 @@ namespace LogitechLCDFFXI
             return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
         }
 
-        [System.Obsolete("",true)]
-        private int expbarselection(int expcur, int expneed)
-        {
-            return Convert.ToInt32(System.Math.Round(map(expcur, 0, expneed, 0, 151)));
-        }
-
         private void updateCurrentDisplay(int dispMode)
         {
             if (dispMode == -1) /*Initial Screen*/
@@ -204,12 +200,20 @@ namespace LogitechLCDFFXI
             }
             else if (dispMode == 0) /*First Tab*/
             {
-                //TODO:HP, MP, EXP, no more bar
+                //TODO:HP, MP, EXP
                 Logitech.LogiLcdMonoSetText(0, charName + " " + job + lvl + "/" + sjob + slvl);
                 Logitech.LogiLcdMonoSetText(1, "HP: " + hp + "/" + mhp);
                 Logitech.LogiLcdMonoSetText(2, "MP: " + mp + "/" + mmp);
-                Logitech.LogiLcdMonoSetText(3, "EXP: " + curEXP + "/" + nextEXP);
-                Logitech.LogiLcdMonoSetBackground(Logitech.lcdBackroundBlank);
+                if (rb_exp_text.Checked)
+                {
+                    Logitech.LogiLcdMonoSetText(3, "EXP: " + curEXP + "/" + nextEXP);
+                    Logitech.LogiLcdMonoSetBackground(Logitech.lcdBackroundBlank);
+                }
+                else if (rb_exp_bar.Checked)
+                {
+                    Logitech.LogiLcdMonoSetText(3, "");
+                    Logitech.LogiLcdMonoSetBackground(expbar.createExpBar(map(curEXP, 0, nextEXP, 0, 152)));
+                }
             }
             else if (dispMode == 1) /*Second Tab*/
             {
