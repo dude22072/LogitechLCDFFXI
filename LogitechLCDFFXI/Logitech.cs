@@ -37,43 +37,83 @@ namespace LogitechLCDFFXI
 
 
         //string _dllname = "LogitechLcdEnginesWrapper.dll";
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool LogiLcdInit(String friendlyName, LcdType lcdType);
 
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool LogiLcdIsConnected(LcdType lcdType);
 
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool LogiLcdIsButtonPressed(Buttons button);
 
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern void LogiLcdUpdate();
 
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern void LogiLcdShutdown();
 
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool LogiLcdMonoSetBackground(byte[] monoBitmap);
 
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool LogiLcdMonoSetText(int lineNumber, String text);
 
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool LogiLcdColorSetBackground(byte[] colorBitmap);
 
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool LogiLcdColorSetTitle(String text, int red = 255, int green = 255, int blue = 255);
 
-        [DllImport("LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#if x64
+        [DllImport("x64\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#else
+        [DllImport("x86\\LogitechLcdEnginesWrapper.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+#endif
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool LogiLcdColorSetText(int lineNumber, String text, int red = 255, int green = 255, int blue = 255);
 

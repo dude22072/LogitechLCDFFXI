@@ -26,7 +26,7 @@ namespace LogitechLCDFFXI
         static int currentDisplayMode = -1, previousDisplayMode = 0, returnDisplayTimer = 0;
        
         public static volatile Boolean started,connected = false;
-        public static volatile String[] locationTable = new String[] {"Residential Area",//0
+        public static volatile String[] locationTable = new String[286] {"Residential Area",//0
         "Phanauet Channel","Carpenters Landing","Manaclipper","Bibiki Bay","Uleguerand Range","Bearclaw Pinnacle","Attohwa Chasm","Boneyard Gully","PsoXja","The Shrouded Maw",//10
         "Oldton Movalpolos","Newton Movalpolos","Mine Shaft 2716","Hall of Transference","Abyssea-Konschtat","Promyvion-Holla","Spire of Holla","Promyvion-Dem","Spire of Dem","Promyvion-Mea",//20
         "Spire of Mea","Promyvion-Vahzl","Spire of Vahzl","Lufaise Meadows","Misareaux Coast","Tavnazian Safehold","Phomiuna Aqueducts","Sacrarium","Riverne-Site B01","Riverne-Site A01",//30
@@ -83,11 +83,12 @@ namespace LogitechLCDFFXI
 
         private void Form1_OnClosing(object sender, FormClosingEventArgs e)
         {
+            trayIcon.Visible = false;
             Logitech.LogiLcdShutdown();
             Program.workerObject.RequestStop();
             if (Worker.client != null) { Worker.client.Close(); }
             Worker.tcpclnt.Stop();
-            trayIcon.Visible = false;
+            
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -137,6 +138,7 @@ namespace LogitechLCDFFXI
         }
 
         [System.Obsolete("FFXI doesn't work well with a \"HERES EVERYTHING\" solution.")]
+        //Kept for the Test Character button
         private void reciveInfo(string charname, string job, int lvl, string sjob, int slvl, int curexp, int nextexp, string local, string letcord, string numcord, int px, int py, int pz, int deg, string gametime, string gameday, string weather)
         {
             while (charname.Length < 15) {
