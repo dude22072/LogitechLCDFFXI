@@ -34,16 +34,16 @@ namespace LogitechLCDFFXI
         "Dynamis-Qufim","Dynamis-Tavnazia","Diorama Abdhaljs-Ghelsba","Abdhaljs Isle-Purgonorgo","Abyssea-Tahrongi","Open sea -> Al Zahbi","Open sea -> Mhaura","Al Zahbi","noname","Aht Urhgan Whitegate",//50
         "Wajaom Woodlands","Bhaflau Thickets","Nashmau","Arrapago Reef","Ilrusi Atoll","Periqia","Talacca Cove","Silver Sea -> Nashmau","Silver Sea -> Al Zahbi","The Ashu Talif",//60
         "Mount Zhayolm","Halvung","Lebros Cavern","Navukgo Execution Chamber","Mamook","Mamool Ja Training Grounds","Jade Sepulcher","Aydeewa Subterrane","Leujaoam Sanctum","Chocobo Circuit",//70
-        "","","","","","","","","","Southern San d'Oria",//80
-        "","","","","","","","","","",//90
-        "","","","","","","","","","",//100
-        "","","","","","","","","","",//110
-        "","","","","","","","","","",//120
-        "","","","","","","","","","",//130
-        "","","noname","","","","","","","",//140
-        "","","","","","","","","","",//150
-        "","","","","","","","","","",//160
-        "","","","","","","","","","",//170
+        "The Colosseum","Alzadaal Undersea Ruins","	Zhayolm Remnants","	Arrapago Remnants","Bhaflau Remnants","Silver Sea Remnants","Nyzul Isle","Hazhalm Testing Grounds","Caedarva Mire","Southern San d'Oria",//80
+        "East Ronfaure","Jugner Forest","Vunkerl Inlet","Batallia Downs","La Vaule","Everbloom Hollow","Bastok Markets","North Gustaberg","Grauberg","Pashhow Marshlands",//90
+        "Rolanberry Fields","Beadeaux","Ruhotz Silvermines","Windurst Waters","West Sarutabaruta","Fort Karugo-Narugo","Meriphataud Mountains","Sauromugue Champaign","Castle Oztroja","West Ronfaure",//100
+        "East Ronfaure","La Theine Plateau","Valkurm Dunes","Jugner Forest","Batallia Downs","North Gustaberg","South Gustaberg","Konschtat Highlands","Pashhow Marshlands","Rolanberry Fields",//110
+        "Beaucedine Glacier","Xarcabard","Cape Teriggan","Eastern Altepa Desert","West Sarutabaruta","East Sarutabaruta","Tahrongi Canyon","Buburimu Peninsula","Meriphataud Mountains","Sauromugue Champaign",//120
+        "The Sanctuary of ZiTah","RoMaeve","Yuhtunga Jungle","Yhoator Jungle","Western Altepa Desert","Qufim Island","Behemoths Dominion","Valley of Sorrows","Ghoyus Reverie","RuAun Gardens",//130
+        "Mordion Gaol","Abyssea-La Theine","noname","Dynamis-Beaucedine","Dynamis-Xarcabard","Beaucedine Glacier","Xarcabard","Castle Zvahl Baileys","Horlais Peak","Ghelsba Outpost",//140
+        "Fort Ghelsba","Yughott Grotto","Palborough Mines","Waughroon Shrine","Giddeus","Balgas Dais","Beadeaux","Qulun Dome","Davoi","Monastic Cavern",//150
+        "Castle Oztroja","Altar Room","The Boyahda Tree","Dragons Aery","Castle Zvahl Keep","Throne Room","Middle Delkfutts Tower","Upper Delkfutts Tower","Temple of Uggalepih","Den of Rancor",//160
+        "Castle Zvahl Baileys","Castle Zvahl Keep","Sacrificial Chamber","Garlaige Citadel","Throne Room","Ranguemont Pass","Bostaunieux Oubliette","Chamber of Oracles","Toraimarai Canal","Full Moon Fountain",//170
         "","","","","","","","","","",//180
         "","","","","","","","","noname","",//190
         "","","","","","","","","","",//200
@@ -66,13 +66,18 @@ namespace LogitechLCDFFXI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            reciveInfo("TEST", "TST", 99, "TST", 99, 52800, 118800, "234", "H", "8", -100, -100, -22, 359, "22:22", Worker.days[5], Worker.weather[3]);
+            reciveInfo("TEST", "RDM", 99, "WHM", 99, 52800, 118800, "234", "H", "8", -100, -100, -22, 359, "22:22", Worker.days[5], Worker.weather[3]);
+            hp = 800;
+            mhp = 100;
+            mp = 2;
+            mmp = 4700;
+
             currentDisplayMode = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Logitech.LogiLcdInit("FFXI", Logitech.LcdType.Mono);
+            LogitechLCD.LogiLcdInit("FFXI", LogitechLCD.LcdType.Mono);
             trayIcon.BalloonTipText = "Running in tray. Double click tray icon to maximize.";
             trayIcon.BalloonTipTitle = "FFXI LCD Applet";
             trayIcon.BalloonTipIcon = ToolTipIcon.Info;
@@ -84,7 +89,7 @@ namespace LogitechLCDFFXI
         private void Form1_OnClosing(object sender, FormClosingEventArgs e)
         {
             trayIcon.Visible = false;
-            Logitech.LogiLcdShutdown();
+            LogitechLCD.LogiLcdShutdown();
             Program.workerObject.RequestStop();
             if (Worker.client != null) { Worker.client.Close(); }
             Worker.tcpclnt.Stop();
@@ -115,30 +120,30 @@ namespace LogitechLCDFFXI
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
             
-            if (Logitech.LogiLcdIsConnected(Logitech.LcdType.Mono) /*|| Logitech.LogiLcdIsConnected(Logitech.LcdType.Color)*/)
+            if (LogitechLCD.LogiLcdIsConnected(LogitechLCD.LcdType.Mono) /*|| LogitechLCD.LogiLcdIsConnected(LogitechLCD.LcdType.Color)*/)
             {
                 updateCurrentDisplay(currentDisplayMode);
-                Logitech.LogiLcdUpdate();
+                LogitechLCD.LogiLcdUpdate();
             }
-            if (Logitech.LogiLcdIsButtonPressed(Logitech.Buttons.MonoButton0))
+            if (LogitechLCD.LogiLcdIsButtonPressed(LogitechLCD.Buttons.MonoButton0))
             {
                 currentDisplayMode = 0;
-            }else if (Logitech.LogiLcdIsButtonPressed(Logitech.Buttons.MonoButton1))
+            }else if (LogitechLCD.LogiLcdIsButtonPressed(LogitechLCD.Buttons.MonoButton1))
             {
                 currentDisplayMode = 1;
             }
-            else if (Logitech.LogiLcdIsButtonPressed(Logitech.Buttons.MonoButton2))
+            else if (LogitechLCD.LogiLcdIsButtonPressed(LogitechLCD.Buttons.MonoButton2))
             {
                 currentDisplayMode = 2;
             }
-            else if (Logitech.LogiLcdIsButtonPressed(Logitech.Buttons.MonoButton3))
+            else if (LogitechLCD.LogiLcdIsButtonPressed(LogitechLCD.Buttons.MonoButton3))
             {
                 currentDisplayMode = 3;
             }
         }
 
-        [System.Obsolete("FFXI doesn't work well with a \"HERES EVERYTHING\" solution.")]
         //Kept for the Test Character button
+        [System.Obsolete("FFXI doesn't work well with a \"HERES EVERYTHING\" solution.")]
         private void reciveInfo(string charname, string job, int lvl, string sjob, int slvl, int curexp, int nextexp, string local, string letcord, string numcord, int px, int py, int pz, int deg, string gametime, string gameday, string weather)
         {
             while (charname.Length < 15) {
@@ -191,73 +196,73 @@ namespace LogitechLCDFFXI
         {
             if (dispMode == -1) /*Initial Screen*/
             {
-                Logitech.LogiLcdMonoSetText(0, "");
-                Logitech.LogiLcdMonoSetText(1, "     Final Fantasy XI     ");
-                Logitech.LogiLcdMonoSetText(2, "          Online          ");
+                LogitechLCD.LogiLcdMonoSetText(0, "");
+                LogitechLCD.LogiLcdMonoSetText(1, "     Final Fantasy XI     ");
+                LogitechLCD.LogiLcdMonoSetText(2, "          Online          ");
                 if (started && !connected)
                 {
-                    Logitech.LogiLcdMonoSetText(3, "   Awaiting Connection... ");
-                } else { Logitech.LogiLcdMonoSetText(3, ""); }
-                Logitech.LogiLcdMonoSetBackground(Logitech.lcdBackroundBlank);
+                    LogitechLCD.LogiLcdMonoSetText(3, "   Awaiting Connection... ");
+                } else { LogitechLCD.LogiLcdMonoSetText(3, ""); }
+                LogitechLCD.LogiLcdMonoSetBackground(LogitechLCD.lcdBackroundBlank);
             }
             else if (dispMode == 0) /*First Tab*/
             {
                 //TODO:HP, MP, EXP
-                Logitech.LogiLcdMonoSetText(0, charName + " " + job + lvl + "/" + sjob + slvl);
-                Logitech.LogiLcdMonoSetText(1, "HP: " + hp + "/" + mhp);
-                Logitech.LogiLcdMonoSetText(2, "MP: " + mp + "/" + mmp);
+                LogitechLCD.LogiLcdMonoSetText(0, charName + " " + job + lvl + "/" + sjob + slvl);
+                LogitechLCD.LogiLcdMonoSetText(1, "HP: " + hp + "/" + mhp);
+                LogitechLCD.LogiLcdMonoSetText(2, "MP: " + mp + "/" + mmp);
                 if (rb_exp_text.Checked)
                 {
-                    Logitech.LogiLcdMonoSetText(3, "EXP: " + curEXP + "/" + nextEXP);
-                    Logitech.LogiLcdMonoSetBackground(Logitech.lcdBackroundBlank);
+                    LogitechLCD.LogiLcdMonoSetText(3, "EXP: " + curEXP + "/" + nextEXP);
+                    LogitechLCD.LogiLcdMonoSetBackground(LogitechLCD.lcdBackroundBlank);
                 }
                 else if (rb_exp_bar.Checked)
                 {
-                    Logitech.LogiLcdMonoSetText(3, "");
-                    Logitech.LogiLcdMonoSetBackground(expbar.createExpBar(map(curEXP, 0, nextEXP, 0, 152)));
+                    LogitechLCD.LogiLcdMonoSetText(3, "");
+                    LogitechLCD.LogiLcdMonoSetBackground(expbar.createExpBar(map(curEXP, 0, nextEXP, 0, 152)));
                 }
             }
             else if (dispMode == 1) /*Second Tab*/
             {
                 if (location != "?")
                 {
-                    Logitech.LogiLcdMonoSetText(0, locationTable[Convert.ToInt64(location)]);
-                } else { Logitech.LogiLcdMonoSetText(0, "?");  }
-                if (numbercord.Length < 2) { Logitech.LogiLcdMonoSetText(1, "(" + lettercord + "-" + numbercord + ")  " + time + "  " + day);}
-                else { Logitech.LogiLcdMonoSetText(1, "(" + lettercord + "-" + numbercord + ") " + time + "  " + day); }
-                Logitech.LogiLcdMonoSetText(2, "X:"+x+" Y:"+y+" Z:"+z + " " + direction + degree + "°");
-                Logitech.LogiLcdMonoSetText(3, "Weather: " + conditions);
-                Logitech.LogiLcdMonoSetBackground(Logitech.lcdBackroundBlank);
+                    LogitechLCD.LogiLcdMonoSetText(0, locationTable[Convert.ToInt64(location)]);
+                } else { LogitechLCD.LogiLcdMonoSetText(0, "?");  }
+                if (numbercord.Length < 2) { LogitechLCD.LogiLcdMonoSetText(1, "(" + lettercord + "-" + numbercord + ")  " + time + "  " + day);}
+                else { LogitechLCD.LogiLcdMonoSetText(1, "(" + lettercord + "-" + numbercord + ") " + time + "  " + day); }
+                LogitechLCD.LogiLcdMonoSetText(2, "X:"+x+" Y:"+y+" Z:"+z + " " + direction + degree + "°");
+                LogitechLCD.LogiLcdMonoSetText(3, "Weather: " + conditions);
+                LogitechLCD.LogiLcdMonoSetBackground(LogitechLCD.lcdBackroundBlank);
             }
             else if (dispMode == 2) /*Third Tab*/
             {
-                Logitech.LogiLcdMonoSetText(0, "Tab 3");
-                Logitech.LogiLcdMonoSetText(1, "");
-                Logitech.LogiLcdMonoSetText(2, "");
-                Logitech.LogiLcdMonoSetText(3, "");
-                Logitech.LogiLcdMonoSetBackground(Logitech.lcdBackroundBlank);
+                LogitechLCD.LogiLcdMonoSetText(0, "Tab 3");
+                LogitechLCD.LogiLcdMonoSetText(1, "");
+                LogitechLCD.LogiLcdMonoSetText(2, "");
+                LogitechLCD.LogiLcdMonoSetText(3, "");
+                LogitechLCD.LogiLcdMonoSetBackground(LogitechLCD.lcdBackroundBlank);
             }
             else if (dispMode == 3) /*Fourth Tab*/
             {
-                Logitech.LogiLcdMonoSetText(0, "Tab 4");
-                Logitech.LogiLcdMonoSetText(1, "");
-                Logitech.LogiLcdMonoSetText(2, "");
-                Logitech.LogiLcdMonoSetText(3, "");
-                Logitech.LogiLcdMonoSetBackground(Logitech.lcdBackroundBlank);
+                LogitechLCD.LogiLcdMonoSetText(0, "Tab 4");
+                LogitechLCD.LogiLcdMonoSetText(1, "");
+                LogitechLCD.LogiLcdMonoSetText(2, "");
+                LogitechLCD.LogiLcdMonoSetText(3, "");
+                LogitechLCD.LogiLcdMonoSetBackground(LogitechLCD.lcdBackroundBlank);
             }
             else if (dispMode == 4) /*Tell Recived*/
             {
-                Logitech.LogiLcdMonoSetText(0, tellUser);
-                Logitech.LogiLcdMonoSetText(1, tellMessage.Substring(0, tellMessage.Length));
+                LogitechLCD.LogiLcdMonoSetText(0, tellUser);
+                LogitechLCD.LogiLcdMonoSetText(1, tellMessage.Substring(0, tellMessage.Length));
                 if (tellMessage.Length > 26)
                 {
-                    Logitech.LogiLcdMonoSetText(2, tellMessage.Substring(26, tellMessage.Length-26));
-                } else { Logitech.LogiLcdMonoSetText(2, ""); }
+                    LogitechLCD.LogiLcdMonoSetText(2, tellMessage.Substring(26, tellMessage.Length-26));
+                } else { LogitechLCD.LogiLcdMonoSetText(2, ""); }
                 if (tellMessage.Length > 53)
                 {
-                    Logitech.LogiLcdMonoSetText(3, tellMessage.Substring(53, tellMessage.Length-53));
-                } else { Logitech.LogiLcdMonoSetText(3, ""); }
-                Logitech.LogiLcdMonoSetBackground(Logitech.lcdBackroundBlank);
+                    LogitechLCD.LogiLcdMonoSetText(3, tellMessage.Substring(53, tellMessage.Length-53));
+                } else { LogitechLCD.LogiLcdMonoSetText(3, ""); }
+                LogitechLCD.LogiLcdMonoSetBackground(LogitechLCD.lcdBackroundBlank);
                 returnDisplayTimer++;
                 if(returnDisplayTimer >= 50) {
                     returnDisplayTimer = 0;
@@ -279,9 +284,6 @@ namespace LogitechLCDFFXI
 
         public static string formatTime(int input)
         {
-            /*hour = input / 60;
-            min = input % 60;
-            return hour + ":" + min.ToString().PadLeft(2, '0');*/
             return input / 60 + ":" + (input % 60).ToString().PadLeft(2, '0');
         }
 

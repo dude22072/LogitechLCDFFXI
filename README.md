@@ -17,3 +17,4 @@ Only monochrome support is currently planned, but colour LCD may come in the fut
 # Credits
 Experience Code borrowed from barfiller  
 Zone IDs from [Darkstar Project Wiki](https://wiki.dspt.info/index.php/Zone_IDs)  
+LogitechEnginesWrapper.dll from Offical Logitech C++ SDK, converted to C# using LogitechLCD.cs  
