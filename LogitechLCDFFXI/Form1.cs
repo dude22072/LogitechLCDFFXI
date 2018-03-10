@@ -26,7 +26,7 @@ namespace LogitechLCDFFXI
         static int currentDisplayMode = -1, previousDisplayMode = 0, returnDisplayTimer = 0;
        
         public static volatile Boolean started,connected = false;
-        public static volatile String[] locationTable = new String[286] {"Residential Area",//0
+        public static readonly String[] locationTable = new String[286] {"Residential Area",//0
         "Phanauet Channel","Carpenters Landing","Manaclipper","Bibiki Bay","Uleguerand Range","Bearclaw Pinnacle","Attohwa Chasm","Boneyard Gully","PsoXja","The Shrouded Maw",//10
         "Oldton Movalpolos","Newton Movalpolos","Mine Shaft 2716","Hall of Transference","Abyssea-Konschtat","Promyvion-Holla","Spire of Holla","Promyvion-Dem","Spire of Dem","Promyvion-Mea",//20
         "Spire of Mea","Promyvion-Vahzl","Spire of Vahzl","Lufaise Meadows","Misareaux Coast","Tavnazian Safehold","Phomiuna Aqueducts","Sacrarium","Riverne-Site B01","Riverne-Site A01",//30
@@ -44,12 +44,12 @@ namespace LogitechLCDFFXI
         "Fort Ghelsba","Yughott Grotto","Palborough Mines","Waughroon Shrine","Giddeus","Balgas Dais","Beadeaux","Qulun Dome","Davoi","Monastic Cavern",//150
         "Castle Oztroja","Altar Room","The Boyahda Tree","Dragons Aery","Castle Zvahl Keep","Throne Room","Middle Delkfutts Tower","Upper Delkfutts Tower","Temple of Uggalepih","Den of Rancor",//160
         "Castle Zvahl Baileys","Castle Zvahl Keep","Sacrificial Chamber","Garlaige Citadel","Throne Room","Ranguemont Pass","Bostaunieux Oubliette","Chamber of Oracles","Toraimarai Canal","Full Moon Fountain",//170
-        "","","","","","","","","","",//180
-        "","","","","","","","","noname","",//190
-        "","","","","","","","","","",//200
-        "","","","","","","","","","noname",//210
-        "","","","","","","","","noname","",//220
-        "","","","","","","","","noname","Southern San d'Oria",//230
+        "Crawlers Nest","Zeruhn Mines","Korroloka Tunnel","Kuftal Tunnel","The Eldieme Necropolis","Sea Serpent Grotto","VeLugannon Palace","The Shrine of RuAvitau","Stellar Fulcrum","LaLoff Amphitheater",//180
+        "The Celestial Nexus","Walk of Echoes","Maquette Abdhaljs Legion","Lower Delkfutts Tower","Dynamis-San dOria","Dynamis-Bastok","Dynamis-Windurst","Dynamis-Jeuno","noname","King Ranperres Tomb",//190
+        "Dangruf Wadi","Inner Horutoto Ruins","Ordelles Caves","Outer Horutoto Ruins","The Eldieme Necropolis","Gusgen Mines","Crawlers Nest","Maze of Shakhrami","noname","Garlaige Citadel",//200
+        "Cloister of Gales","Cloister of Storms","Cloister of Frost","FeiYin","Ifrits Cauldron","QuBia Arena","Cloister of Flames","Quicksand Caves","Cloister of Tremors","noname",//210
+        "Cloister of Tides","Gustav Tunnel","Labyrinth of Onzozo","Residential Area","Abyssea-Attohwa","Abyssea-Misareaux","Abyssea-Vunkerl","Abyssea-Altepa","noname","Ship bound for Selbina",//220
+        "Ship bound for Mhaura","Provenance","San dOria-Jeuno Airship","Bastok-Jeuno Airship","	Windurst-Jeuno Airship","Kazham-Jeuno Airship","Ship bound for Selbina","Ship bound for Mhaura","noname","Southern San d'Oria",//230
         "Northern San d'Oria","Port San d'Oria","Chateau d'Oranguille","Bastok Mines","Bastok Markets","Port Bastok","Metalworks","Windrust Waters","Windrust Walls","Port Windrust",//240
         "Windrust Woods","Heavens Tower","RuLude Gardens","Upper Jeuno","Lower Jueno","Port Jueno","Rabao","Selbina","Mhaura","Kazham",//250
         "Hall of the Gods","Norg","Abyssea-Uleguerand","Abyssea-Grauberg","Abyssea-Empyreal Paradox","Western Adoulin","Eastern Adoulin","Rala Waterways","Rala Waterways","Yahse Hunting Grounds",//260
@@ -66,7 +66,7 @@ namespace LogitechLCDFFXI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            reciveInfo("TEST", "RDM", 99, "WHM", 99, 52800, 118800, "234", "H", "8", -100, -100, -22, 359, "22:22", Worker.days[5], Worker.weather[3]);
+            reciveInfo("TEST", "RDM", 99, "WHM", 99, 52800, 118800, "183", "H", "8", -100, -100, -22, 359, "22:22", Worker.days[5], Worker.weather[3]);
             hp = 800;
             mhp = 100;
             mp = 2;
